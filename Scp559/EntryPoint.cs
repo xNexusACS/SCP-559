@@ -29,12 +29,6 @@ public class EntryPoint : Plugin<Config>
             return;
         }
 
-        if (Config.CakeConfig.SpawnPoints.IsEmpty() || Config.CakeConfig.SchematicName.IsEmpty())
-        {
-            Log.Error("The SpawnPoints or SchematicName Configuration is Empty!, aborting plugin startup.");
-            return;
-        }
-
         Instance = this;
 
         _scp559Manager = new Scp559Manager(this);
