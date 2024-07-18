@@ -3,7 +3,7 @@
 Remember the funny cake that makes the people small and change the players voice from the christmas updates? Well, its here in a plugin, for everyone!
 
 ## Install Instructions
-- Download EXILED 8.9.6 (Prior to EXILED 9.0).
+- Download EXILED 8.9.6 (or any version prior to EXILED 9.0.0 but higuer than 8.9.0).
 - Install MapEditorReborn.
 - Download and install the plugin with the default schematic provided in the Release or create your own.
 - Place the schematic in the MapEditorReborn schematics folder.
