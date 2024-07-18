@@ -98,6 +98,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Commands\RoomPoint.cs" />
         <Compile Include="Config.cs" />
         <Compile Include="EntryPoint.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
@@ -107,6 +108,8 @@
         <Compile Include="Utilities\Pooling\OpusDecoderPool.cs" />
         <Compile Include="Utilities\Pooling\OpusEncoderPool.cs" />
         <Compile Include="Utilities\Pooling\PitchShifterPool.cs" />
+        <Compile Include="Utilities\RoomPoint\RoomPointObject.cs" />
+        <Compile Include="Utilities\RoomPoint\SerializedVector3.cs" />
         <Compile Include="Utilities\Voice\PitchShifter.cs" />
         <Compile Include="Utilities\Voice\VoicePitchUtilities.cs" />
     </ItemGroup>
