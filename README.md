@@ -4,7 +4,7 @@ Remember the funny cake that makes the people small and change the players voice
 
 ## Install Instructions
 - Download EXILED 8.9.6 (Prior to EXILED 9.0).
-- Install ![https://github.com/Michal78900/MapEditorReborn]MapEditorReborn.
+- Install MapEditorReborn.
 - Download and install the plugin with the default schematic provided in the Release or create your own.
 
 ## Configuration
