@@ -9,7 +9,7 @@ Remember the funny cake that makes the people small and change the players voice
 - Place the schematic in the MapEditorReborn schematics folder.
 
 ## Configuration
-To load correctly the plugin needs the SpawnPoints config to be setted up to specific RoomTypes and local positions inside rooms.
+To load correctly the schematic, the plugin needs the SpawnPoints config to be setted up to specific RoomTypes and local positions inside rooms.
 You can find all the RoomTypes in the EXILED discord.
 
 To get the local positions, with a plugin you need to do `Room.Get(YourRoomType).GameObject.transform.TransformPoint(x, y, z);`
