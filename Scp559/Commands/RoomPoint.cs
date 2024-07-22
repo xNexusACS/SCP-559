@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Scp559.Commands;
 
+[CommandHandler(typeof(RemoteAdminCommandHandler))]
 public class RoomPoint : ICommand
 {
     public bool Execute(ArraySegment<string> arguments, ICommandSender sender, [UnscopedRef] out string response)
