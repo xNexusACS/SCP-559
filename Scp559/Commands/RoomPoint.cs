@@ -34,6 +34,4 @@ public class RoomPoint : ICommand
     public string[] Aliases { get; } = { "rp" };
     
     public string Description { get; } = "Gets the local position you're looking with the camera";
-    
-    public bool SanitizeResponse { get; } = false;
 }

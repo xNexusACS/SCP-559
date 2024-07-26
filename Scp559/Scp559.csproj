@@ -38,14 +38,14 @@
         <Reference Include="0Harmony">
           <HintPath>..\..\Universe\UniverseModule\bin\Debug\0Harmony.dll</HintPath>
         </Reference>
-        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\EXILED.8.9.6\lib\net48\Assembly-CSharp-Publicized.dll</HintPath>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>..\..\AssemblyPublicizer\AssemblyPublicizer\bin\Debug\net8.0\Publicized-Assemblies\Assembly-CSharp-Publicized.dll</HintPath>
         </Reference>
         <Reference Include="Assembly-CSharp-firstpass">
           <HintPath>D:\Coding\Forks\KryptoneCore\KryptoneCore\bin\Debug\Assembly-CSharp-firstpass.dll</HintPath>
         </Reference>
-        <Reference Include="CommandSystem.Core, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\packages\EXILED.8.9.6\lib\net48\CommandSystem.Core.dll</HintPath>
+        <Reference Include="CommandSystem.Core">
+          <HintPath>D:\Steam Biblioteca\steamapps\common\SCP Secret Laboratory Dedicated Server\SCPSL_Data\Managed\CommandSystem.Core.dll</HintPath>
         </Reference>
         <Reference Include="Exiled.API, Version=8.9.6.0, Culture=neutral, processorArchitecture=Amd64">
           <HintPath>..\packages\EXILED.8.9.6\lib\net48\Exiled.API.dll</HintPath>
