@@ -1,6 +1,6 @@
 using System;
-using System.IO;
 using Exiled.API.Features;
+using Scp559.Utilities;
 
 namespace Scp559;
 
@@ -13,7 +13,7 @@ public class EntryPoint : Plugin<Config>
 
     public override string Prefix { get; } = "scp_559";
 
-    public override Version Version { get; } = new(0, 0, 2);
+    public override Version Version { get; } = new(0, 0, 3);
 
     public override Version RequiredExiledVersion { get; } = new(8, 9, 6);
 
@@ -23,7 +23,7 @@ public class EntryPoint : Plugin<Config>
 
     public override void OnEnabled()
     {
-        if (!File.Exists(Path.Combine(Paths.Plugins, "MapEditorReborn.dll")))
+        if (!StartupChecks.CheckForMapEditorReborn())
         {
             Log.Error("MapEditorReborn is missing!, aborting plugin startup.");
             return;
@@ -39,11 +39,17 @@ public class EntryPoint : Plugin<Config>
         Exiled.Events.Handlers.Server.RoundStarted += _scp559Manager.OnRoundStart;
         Exiled.Events.Handlers.Server.EndingRound += _scp559Manager.OnEndingRound;
         
+        // Internal
+        Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
+        
         base.OnEnabled();
     }
 
     public override void OnDisabled()
     {
+        // Internal
+        Exiled.Events.Handlers.Server.WaitingForPlayers -= OnWaitingForPlayers;
+        
         Exiled.Events.Handlers.Player.UsedItem -= _scp559Manager.OnUsedItem;
         Exiled.Events.Handlers.Player.TogglingNoClip -= _scp559Manager.OnToggleNoClip;
         Exiled.Events.Handlers.Player.VoiceChatting -= _scp559Manager.OnVoiceChatting;
@@ -55,4 +61,6 @@ public class EntryPoint : Plugin<Config>
         Instance = null;
         base.OnDisabled();
     }
+
+    private static void OnWaitingForPlayers() => StartupChecks.UnRegisterIncompatibilities();
 }
