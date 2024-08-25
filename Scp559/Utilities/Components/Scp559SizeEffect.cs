@@ -12,13 +12,15 @@ public class Scp559SizeEffect : MonoBehaviour
     
     private void Update()
     {
-        if (!(_player.Scale.x > EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect.x)) return;
+        if (!(_player.Scale.y > EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect.y)) return;
         
         _player.EnableEffect(EffectType.Ensnared, duration: 1f);
         _player.Scale -= new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
 
-        if (_player.Scale.x < EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect.x)
-            _player.Scale = EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect;
+        if (!(_player.Scale.y < EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect.y)) return;
+        
+        _player.Scale = EntryPoint.Instance.Config.CakeConfig.PlayerScaleUnderCakeEffect;
+        Destroy(this);
     }
 
     private void OnDestroy() => _player = null;

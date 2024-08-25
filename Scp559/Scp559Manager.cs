@@ -24,7 +24,13 @@ public class Scp559Manager
 
     internal void OnUsedItem(UsedItemEventArgs args)
     {
-        if (!args.Player.GameObject.TryGetComponent(out Scp559SizeEffect scp559Effect) && args.Item.Type is not ItemType.SCP500)
+        if (args.Item?.Type is not ItemType.SCP500)
+            return;
+
+        if (args.Player.Scale == Vector3.one)
+            return;
+
+        if (!args.Player.GameObject.TryGetComponent(out Scp559SizeEffect scp559Effect))
             return;
         
         Object.Destroy(scp559Effect);
@@ -36,10 +42,10 @@ public class Scp559Manager
         if (args.Player.IsNoclipPermitted || args.Player.IsScp)
             return;
         
-        args.IsAllowed = false;
-
         if (_cakeModel is null)
             return;
+        
+        args.IsAllowed = false;
 
         if (Vector3.Distance(args.Player.Position, _cakeModel.Position) >= 2.5f)
             return;

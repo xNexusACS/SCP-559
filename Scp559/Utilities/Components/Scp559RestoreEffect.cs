@@ -15,11 +15,10 @@ public class Scp559RestoreEffect : MonoBehaviour
         _player.EnableEffect(EffectType.Ensnared, duration: 1f);
         _player.Scale += new Vector3(0.1f, 0.1f, 0.1f) * Time.deltaTime;
             
-        if (!(_player.Scale.x > 1f)) return;
+        if (!(_player.Scale.y > 1f)) return;
         
         _player.Scale = new Vector3(1, 1, 1);
         Destroy(this);
-
     }
 
     private void OnDestroy() => _player = null;
