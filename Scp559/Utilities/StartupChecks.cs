@@ -11,7 +11,7 @@ namespace Scp559.Utilities;
 
 public static class StartupChecks
 {
-    public static bool CheckForMapEditorReborn()
+    public static bool IsMapEditorInstalled()
     {
         return File.Exists(Path.Combine(Paths.Plugins, "MapEditorReborn.dll"));
     }
@@ -33,7 +33,7 @@ public static class StartupChecks
         
         Type commandInterfaceType = typeof(ICommand);
         
-        Type roomPointType = jadeLibDep.GetTypes().FirstOrDefault(t => t.Name == "RoomPoint");
+        Type roomPointType = jadeLibDep.GetTypes().FirstOrDefault(t => t.Name == "RoomPointCommand");
 
         if (roomPointType is null || !commandInterfaceType.IsAssignableFrom(roomPointType)) 
             return;

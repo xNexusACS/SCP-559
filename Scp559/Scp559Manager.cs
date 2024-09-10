@@ -4,8 +4,7 @@ using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs.Player;
 using Exiled.Events.EventArgs.Server;
-using MapEditorReborn.API.Features;
-using MapEditorReborn.API.Features.Objects;
+using MapEditorReborn.Events.EventArgs;
 using MEC;
 using Scp559.Utilities.Components;
 using Scp559.Utilities.Voice;
@@ -18,9 +17,17 @@ public class Scp559Manager
 {
     private readonly EntryPoint _entryPoint;
     
+    private readonly List<CoroutineHandle> _coroutines = new();
+    
     public Scp559Manager(EntryPoint entryPoint) => _entryPoint = entryPoint;
-
-    private MapEditorObject _cakeModel;
+    
+    internal void OnSchematicSpawned(SchematicSpawnedEventArgs args)
+    {
+        if (args.Name != _entryPoint.Config.CakeConfig.SchematicName)
+            return;
+        
+        args.Schematic.gameObject.AddComponent<Scp559Cake>().InitializeComponent(args.Schematic);
+    }
 
     internal void OnUsedItem(UsedItemEventArgs args)
     {
@@ -42,13 +49,13 @@ public class Scp559Manager
         if (args.Player.IsNoclipPermitted || args.Player.IsScp)
             return;
         
-        if (_cakeModel is null)
+        /*if (_cakeModel is null)
             return;
         
         args.IsAllowed = false;
 
         if (Vector3.Distance(args.Player.Position, _cakeModel.Position) >= 2.5f)
-            return;
+            return;*/
         
         if (!args.Player.GameObject.TryGetComponent(out Scp559SizeEffect _))
             args.Player.GameObject.AddComponent<Scp559SizeEffect>().InitializeComponent(args.Player);
@@ -73,23 +80,23 @@ public class Scp559Manager
 
     internal void OnRoundStart()
     {
-        Timing.RunCoroutine(CakeSpawnHandler());
-        Timing.RunCoroutine(SlicePickupIndicator());
+        _coroutines.Add(Timing.RunCoroutine(CakeSpawnHandler()));
+        _coroutines.Add(Timing.RunCoroutine(SlicePickupIndicator()));
     }
 
     internal void OnEndingRound(EndingRoundEventArgs _)
     {
-        if (_cakeModel is null)
-            return;
+        foreach (CoroutineHandle coroutine in _coroutines)
+            Timing.KillCoroutines(coroutine);
         
-        _cakeModel = null;
+        _coroutines.Clear();
     }
 
     private IEnumerator<float> CakeSpawnHandler()
     {
         yield return Timing.WaitForSeconds(_entryPoint.Config.CakeConfig.FirstCakeSpawnDelay);
 
-        while (true)
+        /*while (true)
         {
             if (Round.IsEnded)
                 yield break;
@@ -107,7 +114,7 @@ public class Scp559Manager
             _cakeModel = null;
 
             yield return Timing.WaitForSeconds(_entryPoint.Config.CakeConfig.NormalSpawnDelay);
-        }
+        }*/
     }
     
     private IEnumerator<float> SlicePickupIndicator()
@@ -119,10 +126,7 @@ public class Scp559Manager
 
             foreach (Player player in Player.List)
             {
-                if (_cakeModel is not null && !player.IsScp && Vector3.Distance(player.Position, _cakeModel.Position) <= 2.5f)
-                {
-                    player.ShowHint(_entryPoint.Config.CakeConfig.SlicePickupHint, 1.1f);
-                }
+                // TODO: Hint
             }
 
             yield return Timing.WaitForSeconds(1f);

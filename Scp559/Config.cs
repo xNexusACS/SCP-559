@@ -40,7 +40,10 @@ public class CakeConfig
 
     [Description("The Target Player Scale when eating the cake slice")]
     public Vector3 PlayerScaleUnderCakeEffect { get; set; } = new(0.6f, 0.6f, 0.6f);
-    
+
     [Description("The Places and positions where the cake can spawn")]
-    public Dictionary<RoomType, Vector3> SpawnPoints { get; set; } = new();
+    public Dictionary<RoomType, Vector3> SpawnPoints { get; set; } = new()
+    {
+        [RoomType.Hcz049] = new Vector3(1, 1, 1)
+    };
 }

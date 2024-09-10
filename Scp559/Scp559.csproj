@@ -103,6 +103,7 @@
         <Compile Include="EntryPoint.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Scp559Manager.cs" />
+        <Compile Include="Utilities\Components\Scp559Cake.cs" />
         <Compile Include="Utilities\StartupChecks.cs" />
         <Compile Include="Utilities\Components\Scp559RestoreEffect.cs" />
         <Compile Include="Utilities\Components\Scp559SizeEffect.cs" />

@@ -1,5 +1,6 @@
 using System;
 using Exiled.API.Features;
+using MapEditorReborn.Events.Handlers;
 using Scp559.Utilities;
 
 namespace Scp559;
@@ -23,7 +24,7 @@ public class EntryPoint : Plugin<Config>
 
     public override void OnEnabled()
     {
-        if (!StartupChecks.CheckForMapEditorReborn())
+        if (!StartupChecks.IsMapEditorInstalled())
         {
             Log.Error("MapEditorReborn is missing!, aborting plugin startup.");
             return;
@@ -38,6 +39,7 @@ public class EntryPoint : Plugin<Config>
         Exiled.Events.Handlers.Player.Dying += _scp559Manager.OnDying;
         Exiled.Events.Handlers.Server.RoundStarted += _scp559Manager.OnRoundStart;
         Exiled.Events.Handlers.Server.EndingRound += _scp559Manager.OnEndingRound;
+        Schematic.SchematicSpawned += _scp559Manager.OnSchematicSpawned;
         
         // Internal
         Exiled.Events.Handlers.Server.WaitingForPlayers += OnWaitingForPlayers;
